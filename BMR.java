@@ -50,7 +50,9 @@ public class BMR {
     
     public static void bmi(double weitgt, double height) {
         System.out.println("Base on your gender, age, and heigth.");
-        System.out.println("Your BMI will be" + " " + (weitgt / Math.pow(height, 2)*10000));
+      //  double bmindex;
+        double bmindex = (weitgt / Math.pow(height / 100, 2));
+        System.out.printf("Your BMI will be" ,"%.3f %n" ,bmindex); 
 
     }
 
