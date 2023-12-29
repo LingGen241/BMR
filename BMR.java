@@ -40,7 +40,7 @@ public class BMR {
                 
                 System.out.println("Your age is: " + " " + age + " " + "your weight is: " + weight + " " + "kg" + " "
                         + "and your heigth is:" + " " + height + " " + "cm"+ " "+ gender);
-                bmi(weight, height);
+                bmi(weight, height, gender);
             } catch (Exception e) {
                 System.out.println("Invalid input. Please enter numeric values for age and weight.");
             }
@@ -48,11 +48,35 @@ public class BMR {
         
     }
     
-    public static void bmi(double weitgt, double height) {
+    public static void bmi(double weitgt, double height, String gender) {
         System.out.println("Base on your gender, age, and heigth.");
-      //  double bmindex;
         double bmindex = (weitgt / Math.pow(height / 100, 2));
-        System.out.printf("Your BMI will be" ,"%.3f %n" ,bmindex); 
+       // System.out.printf("Your BMI will be %.1f \n", bmindex);
+
+        String category;
+        
+        if (gender.equals('M')) {
+            if (bmindex < 20) {
+                category = "Underweight";
+            } else if (bmindex < 25) {
+                category = "Normal weight";
+            } else if (bmindex < 30) {
+                category = "Overweight";
+            } else {
+                category = "Obesity";
+            }
+        } else {
+            if (bmindex < 19) {
+                category = "Underweight";
+            } else if (bmindex < 24) {
+                category = "Normal weight";
+            } else if (bmindex < 30) {
+                category = "Overweight";
+            } else {
+                category = "Obesity";
+            }
+        }
+        System.out.printf("Your BMI will be %.1f and your category is: %s\n", bmindex, category);
 
     }
 
@@ -67,7 +91,7 @@ public class BMR {
 
     public static void dalay() {
         try {
-            Thread.sleep(1000); // wait for 5 seconds
+            Thread.sleep(1000); // wait for 1 seconds
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
