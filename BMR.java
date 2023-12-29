@@ -21,6 +21,7 @@ public class BMR {
         double height;
         String gender;
         String check = scanner.next();
+        
         if (check.equalsIgnoreCase("No")) {
             System.out.println("Sorry, to see you go.");
         } else {
@@ -42,27 +43,31 @@ public class BMR {
                     + "and your heigth is:" + " " + height + " " + "cm"+ " "+ gender);
                 bmi(weight, height, gender);
 
-                System.out.print("What is your excercise level? 1 - 5");
+                System.out.println("What is your excercise level? 1 - 5");
                 double totalBmr;
-                if (scanner.nextInt() == 1) {
+
+                int userInput = scanner.nextInt();
+
+                if (userInput == 1) {
                     totalBmr = calories(weight, age, height, gender) * 1.2;
-                } else if (scanner.nextInt()==2) {
-                    totalBmr = calories(weight, age, height, gender)*1.375;
-                } else if (scanner.nextInt()==3) {
-                    totalBmr = calories(weight, age, height, gender)*1.55;
-                } else if (scanner.nextInt()==4) {
-                    totalBmr = calories(weight, age, height, gender)*1.725;
+                } else if (userInput == 2) {
+                    totalBmr = calories(weight, age, height, gender) * 1.375;
+                } else if (userInput == 3) {
+                    totalBmr = calories(weight, age, height, gender) * 1.55;
+                } else if (userInput == 4) {
+                    totalBmr = calories(weight, age, height, gender) * 1.725;
                 } else {
                     totalBmr = calories(weight, age, height, gender) * 1.9;
                 }
                 
-                double carb = totalBmr * 0.60;
-                double protein = totalBmr * 0.15;
-                
-                
-                System.out.println("Your BMR is: " + totalBmr);
-                System.out.printf("You need %f grams of carbohydrates per day.\n", carb);
-                System.out.printf("You need %f grams of protein per day.\n",protein);
+                double carb = ((totalBmr * 50) / 100) / 4;
+                double protein = (totalBmr * 0.35) / 4;
+                double fat = (totalBmr * 0.2) / 9;
+
+                System.out.printf("Your BMR is %.0f: \n",totalBmr);
+                System.out.printf("You need %.0f grams of carbohydrates per day.\n", carb);
+                System.out.printf("You need %.0f grams of protein per day.\n", protein);
+                System.out.printf("You need %.0f grams of fat per day.\n", fat);
             } catch (Exception e) {
                 System.out.println("Invalid input. Please enter numeric values for age and weight.");
             }
@@ -96,7 +101,6 @@ public class BMR {
                 category = "Obesity";
             }
         }
-
         System.out.printf("Your BMI will be %.1f and your category is: %s\n", bmindex, category);
     }
 
