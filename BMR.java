@@ -11,7 +11,7 @@ public class BMR {
         System.out.println();
 
         System.out.println("Hi" + " " + name);
-        System.out.println("Welcome" + " " + name + " " + "to our team");
+        System.out.println("Welcome" + " " + name.toUpperCase() + " " + "to our team");
 
         intro();
 
@@ -36,18 +36,18 @@ public class BMR {
                 if (age <= 0) {
                     throw new Exception("Age must be greater than zero");
                 }
-                System.out.println("What is your weight? ");
+                System.out.println("What is your weight? kg");
                 weight = scanner.nextDouble();
 
                 if (weight <= 0) {
                     throw new Exception("Weight must be greater than zero");
                 }
 
-                System.out.println("What is your height? ");
+                System.out.println("What is your height? cm");
                 height = scanner.nextDouble();
 
                 if (height <= 0) {
-                    throw new Exception("height must be greater than zero");
+                    throw new Exception("height must be greater than zero ");
                 }
                 
                 System.out.println("What is your gender? ");
@@ -65,7 +65,9 @@ public class BMR {
                 delay();
 
                 System.out.println();
+                delay();
                 bmi(weight, height, gender);
+                delay();
                 System.out.println("What is your excercise level? 1 - 5");
                 double totalBmr;
 
