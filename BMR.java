@@ -15,34 +15,57 @@ public class BMR {
 
         intro();
 
-        System.out.println("Could we know your age, wegith, and gender? ");
+        System.out.println("Could we know your age, wegith, height,and gender? ");
+
         int age;
         double weight;
         double height;
         String gender;
         String check = scanner.next();
-        
+
         if (check.equalsIgnoreCase("No")) {
             System.out.println("Sorry, to see you go.");
         } else {
             try {
+                System.out.println();
                 System.out.println("Great");
+                System.out.println();
                 System.out.println("What is your age? ");
                 age = scanner.nextInt();
 
+                if (age <= 0) {
+                    throw new Exception("Age must be greater than zero");
+                }
                 System.out.println("What is your weight? ");
                 weight = scanner.nextDouble();
 
-                System.out.println("What is your height?");
+                if (weight <= 0) {
+                    throw new Exception("Weight must be greater than zero");
+                }
+
+                System.out.println("What is your height? ");
                 height = scanner.nextDouble();
 
-                 System.out.println("What is your gender? ");
-                 gender = scanner.next();
+                if (height <= 0) {
+                    throw new Exception("height must be greater than zero");
+                }
                 
-                System.out.println("Your age is: " + " " + age + " " + "your weight is: " + weight + " " + "kg" + " "
-                    + "and your heigth is:" + " " + height + " " + "cm"+ " "+ gender);
-                bmi(weight, height, gender);
+                System.out.println("What is your gender? ");
+                gender = scanner.next();
 
+                System.out.println();
+                delay();
+                System.out.println("Your age is: " + " " + age);
+                delay();
+                System.out.println("Your weight is: " + " " + weight);
+                delay();
+                System.out.println("Your height is: " + " " + height);
+                delay();
+                System.out.println("Your gender is: " + " " + gender.toUpperCase());
+                delay();
+
+                System.out.println();
+                bmi(weight, height, gender);
                 System.out.println("What is your excercise level? 1 - 5");
                 double totalBmr;
 
@@ -59,26 +82,31 @@ public class BMR {
                 } else {
                     totalBmr = calories(weight, age, height, gender) * 1.9;
                 }
-                
+
                 double carb = ((totalBmr * 50) / 100) / 4;
                 double protein = (totalBmr * 0.35) / 4;
                 double fat = (totalBmr * 0.2) / 9;
 
-                System.out.printf("Your BMR is %.0f: \n",totalBmr);
+                delay();
+                System.out.printf("Your BMR is %.0f: \n", totalBmr);
+                delay();
                 System.out.printf("You need %.0f grams of carbohydrates per day.\n", carb);
+                delay();
                 System.out.printf("You need %.0f grams of protein per day.\n", protein);
+                delay();
                 System.out.printf("You need %.0f grams of fat per day.\n", fat);
+                delay();
             } catch (Exception e) {
                 System.out.println("Invalid input. Please enter numeric values for age and weight.");
             }
         }
     }
-    
+
     public static void bmi(double weitgt, double height, String gender) {
         System.out.println("Base on your gender, age, and heigth.");
         double bmindex = (weitgt / Math.pow(height / 100, 2));
         String category;
-        
+
         if (gender.equalsIgnoreCase("M")) {
             if (bmindex < 20) {
                 category = "Underweight";
@@ -94,21 +122,22 @@ public class BMR {
                 category = "Underweight";
             } else if (bmindex >= 19 && bmindex < 24) {
                 category = "Normal weight";
-                
+
             } else if (bmindex >= 24 && bmindex < 29) {
                 category = "Overweight";
             } else {
                 category = "Obesity";
             }
         }
+        // delay();
         System.out.printf("Your BMI will be %.1f and your category is: %s\n", bmindex, category);
     }
 
     public static void intro() {
         System.out.println("This app is builded by Seth and Huy ");
-        dalay();
+        delay();
         System.out.println("The goal is to help people on their journey to meet their calories goals.");
-        dalay();
+        delay();
         System.out.println();
     }
 
@@ -119,9 +148,8 @@ public class BMR {
             return (weight * 10) + (6.25 * heigth) - 5 * age - 161;
         }
     }
-    
 
-    public static void dalay() {
+    public static void delay() {
         try {
             Thread.sleep(1000); // wait for 1 seconds
         } catch (InterruptedException e) {
