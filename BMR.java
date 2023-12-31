@@ -32,26 +32,39 @@ public class BMR {
                 System.out.println();
                 System.out.println("What is your age? ");
                 age = scanner.nextInt();
-
-                if (age <= 0) {
-                    throw new Exception("Age must be greater than zero");
-                }
                 System.out.println("What is your weight? kg");
                 weight = scanner.nextDouble();
-
-                if (weight <= 0) {
-                    throw new Exception("Weight must be greater than zero");
-                }
-
                 System.out.println("What is your height? cm");
                 height = scanner.nextDouble();
 
-                if (height <= 0) {
-                    throw new Exception("height must be greater than zero ");
+
+                while (age <= 0 || weight <= 0 || height <= 0) {
+                    if (age <= 0) {
+                        System.out.println("Invalid age. Please try again.");
+                        age = scanner.nextInt();
+                    }
+                    if (weight <= 0) {
+                        System.out.println("Invalid weight. Please try again.");
+                        weight = scanner.nextDouble();
+                    }
+                    if (height <= 0) {
+                        System.out.println("Invalid height. Please try again.");
+                        height = scanner.nextDouble();
+                    }
                 }
                 
                 System.out.println("What is your gender? ");
                 gender = scanner.next();
+
+                // if (!gender.equalsIgnoreCase("M") && !gender.equalsIgnoreCase("F") && !gender.equalsIgnoreCase("male")
+                //         && !gender.equalsIgnoreCase("female")) {
+                //     throw new Exception("Gender must be M/F or Male/Female");
+                // }
+
+                if (!gender.equalsIgnoreCase("M") && !gender.equalsIgnoreCase("F") && !gender.equalsIgnoreCase("male")
+                        && !gender.equalsIgnoreCase("female")) {
+                    throw new Exception("Invalid gender: " + gender + ". Gender must be M/F or Male/Female");
+                }
 
                 System.out.println();
                 delay();
@@ -85,7 +98,7 @@ public class BMR {
                     totalBmr = calories(weight, age, height, gender) * 1.9;
                 }
 
-                double carb = ((totalBmr * 50) / 100) / 4;
+                double carb = ((totalBmr * 50) / 100) / 4; 
                 double protein = (totalBmr * 0.35) / 4;
                 double fat = (totalBmr * 0.2) / 9;
 
@@ -109,7 +122,7 @@ public class BMR {
         double bmindex = (weitgt / Math.pow(height / 100, 2));
         String category;
 
-        if (gender.equalsIgnoreCase("M")) {
+        if (!gender.equalsIgnoreCase("M") && !gender.equalsIgnoreCase("male")) {
             if (bmindex < 20) {
                 category = "Underweight";
             } else if (bmindex >= 20 && bmindex < 25) {
@@ -131,7 +144,7 @@ public class BMR {
                 category = "Obesity";
             }
         }
-        // delay();
+        delay();
         System.out.printf("Your BMI will be %.1f and your category is: %s\n", bmindex, category);
     }
 
@@ -144,7 +157,7 @@ public class BMR {
     }
 
     public static double calories(double weight, int age, double heigth, String gender) {
-        if (gender.equalsIgnoreCase("M")) {
+        if (gender.equalsIgnoreCase("M") || (gender.equalsIgnoreCase("male"))) {
             return (weight * 10) + (6.25 * heigth) - 5 * age + 5;
         } else {
             return (weight * 10) + (6.25 * heigth) - 5 * age - 161;
@@ -153,7 +166,7 @@ public class BMR {
 
     public static void delay() {
         try {
-            Thread.sleep(1000); // wait for 1 seconds
+            Thread.sleep(170); // wait for 1 seconds
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
