@@ -37,7 +37,6 @@ public class BMR {
                 System.out.println("What is your height? cm");
                 height = scanner.nextDouble();
 
-
                 while (age <= 0 || weight <= 0 || height <= 0) {
                     if (age <= 0) {
                         System.out.println("Invalid age. Please try again.");
@@ -52,14 +51,9 @@ public class BMR {
                         height = scanner.nextDouble();
                     }
                 }
-                
+
                 System.out.println("What is your gender? ");
                 gender = scanner.next();
-
-                // if (!gender.equalsIgnoreCase("M") && !gender.equalsIgnoreCase("F") && !gender.equalsIgnoreCase("male")
-                //         && !gender.equalsIgnoreCase("female")) {
-                //     throw new Exception("Gender must be M/F or Male/Female");
-                // }
 
                 if (!gender.equalsIgnoreCase("M") && !gender.equalsIgnoreCase("F") && !gender.equalsIgnoreCase("male")
                         && !gender.equalsIgnoreCase("female")) {
@@ -83,7 +77,6 @@ public class BMR {
                 delay();
                 System.out.println("What is your excercise level? 1 - 5");
                 double totalBmr;
-
                 int userInput = scanner.nextInt();
 
                 if (userInput == 1) {
@@ -98,19 +91,59 @@ public class BMR {
                     totalBmr = calories(weight, age, height, gender) * 1.9;
                 }
 
-                double carb = ((totalBmr * 50) / 100) / 4; 
+                double carb = ((totalBmr * 50) / 100) / 4;
                 double protein = (totalBmr * 0.35) / 4;
                 double fat = (totalBmr * 0.2) / 9;
 
-                delay();
-                System.out.printf("Your BMR is %.0f: \n", totalBmr);
-                delay();
-                System.out.printf("You need %.0f grams of carbohydrates per day.\n", carb);
-                delay();
-                System.out.printf("You need %.0f grams of protein per day.\n", protein);
-                delay();
-                System.out.printf("You need %.0f grams of fat per day.\n", fat);
-                delay();
+
+                System.out.println("What is your goals? 1. To Lose Weight | 2. To Maintaince Weight | 3.To Gain Muscles and Lose Body Fat");
+                int userDecision = scanner.nextInt();
+                
+                while (true) {
+                    if (userDecision < 1 || userDecision > 3) {
+                        System.out.println("Invalid input.");
+                        userDecision = scanner.nextInt();
+                    }
+                    if (userDecision == 1) {
+                        delay();
+                        System.out.printf("Your BMR is %.0f: \n", totalBmr - 500);
+                        delay();
+                        System.out.printf("You need %.0f grams of carbohydrates per day.\n", carb);
+                        delay();
+                        System.out.printf("You need %.0f grams of protein per day.\n", protein);
+                        delay();
+                        System.out.printf("You need %.0f grams of fat per day.\n", fat);
+                        delay();
+                        break;
+                    }
+                    if (userDecision == 2) {
+                        delay();
+                        System.out.printf("Your BMR is %.0f: \n", totalBmr);
+                        delay();
+                        System.out.printf("You need %.0f grams of carbohydrates per day.\n", carb);
+                        delay();
+                        System.out.printf("You need %.0f grams of protein per day.\n", protein);
+                        delay();
+                        System.out.printf("You need %.0f grams of fat per day.\n", fat);
+                        delay();
+                        break;
+                    }
+
+                    if (userDecision == 3) {
+                        delay();
+                        System.out.printf("Your BMR is %.0f: \n", totalBmr + 150);
+                        delay();
+                        System.out.printf("You need %.0f grams of carbohydrates per day.\n", carb);
+                        delay();
+                        System.out.printf("You need %.0f grams of protein per day.\n", protein + 75);
+                        delay();
+                        System.out.printf("You need %.0f grams of fat per day.\n", fat);
+                        delay();
+                        break;
+                    } 
+                    
+                }
+
             } catch (Exception e) {
                 System.out.println("Invalid input. Please enter numeric values for age and weight.");
             }
@@ -166,7 +199,7 @@ public class BMR {
 
     public static void delay() {
         try {
-            Thread.sleep(170); // wait for 1 seconds
+            Thread.sleep(200); // wait for 1 seconds
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
