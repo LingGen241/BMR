@@ -1,5 +1,8 @@
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
+import java.lang.System;
 
 public class BMR {
     public static void main(String[] args) {
@@ -61,20 +64,20 @@ public class BMR {
                 }
 
                 System.out.println();
-                delay();
+                defaultDelay();
                 System.out.println("Your age is: " + " " + age);
-                delay();
+                defaultDelay();
                 System.out.println("Your weight is: " + " " + weight);
-                delay();
+                defaultDelay();
                 System.out.println("Your height is: " + " " + height);
-                delay();
+                defaultDelay();
                 System.out.println("Your gender is: " + " " + gender.toUpperCase());
-                delay();
+                defaultDelay();
 
                 System.out.println();
-                delay();
+                defaultDelay();
                 bmi(weight, height, gender);
-                delay();
+                defaultDelay();
                 System.out.println("What is your excercise level? 1 - 5");
                 double totalBmr;
                 int userInput = scanner.nextInt();
@@ -95,55 +98,58 @@ public class BMR {
                 double protein = (totalBmr * 0.35) / 4;
                 double fat = (totalBmr * 0.2) / 9;
 
-
-                System.out.println("What is your goals? 1. To Lose Weight | 2. To Maintaince Weight | 3.To Gain Muscles and Lose Body Fat");
+                System.out.println(
+                        "What is your goals? 1. To Lose Weight | 2. To Maintaince Weight | 3.To Gain Muscles and Lose Body Fat");
                 int userDecision = scanner.nextInt();
-                
+
                 while (true) {
-                    if (userDecision < 1 || userDecision > 3) {
-                        System.out.println("Invalid input.");
-                        userDecision = scanner.nextInt();
-                    }
-                    if (userDecision == 1) {
-                        delay();
-                        System.out.printf("Your BMR is %.0f: \n", totalBmr - 500);
-                        delay();
-                        System.out.printf("You need %.0f grams of carbohydrates per day.\n", carb);
-                        delay();
-                        System.out.printf("You need %.0f grams of protein per day.\n", protein);
-                        delay();
-                        System.out.printf("You need %.0f grams of fat per day.\n", fat);
-                        delay();
+                    if (userDecision > 0 && userDecision < 4) {
                         break;
                     }
-                    if (userDecision == 2) {
-                        delay();
-                        System.out.printf("Your BMR is %.0f: \n", totalBmr);
-                        delay();
-                        System.out.printf("You need %.0f grams of carbohydrates per day.\n", carb);
-                        delay();
-                        System.out.printf("You need %.0f grams of protein per day.\n", protein);
-                        delay();
-                        System.out.printf("You need %.0f grams of fat per day.\n", fat);
-                        delay();
-                        break;
-                    }
-
-                    if (userDecision == 3) {
-                        delay();
-                        System.out.printf("Your BMR is %.0f: \n", totalBmr + 100);
-                        delay();
-                        System.out.printf("You need %.0f grams of carbohydrates per day.\n", carb);
-                        delay();
-                        System.out.printf("You need %.0f grams of protein per day.\n", protein + 75);
-                        delay();
-                        System.out.printf("You need %.0f grams of fat per day.\n", fat);
-                        delay();
-                        break;
-                    } 
-                    
+                    System.out.println("Invalid input.");
+                    userDecision = scanner.nextInt();
                 }
+                if (userDecision == 1) {
+                    defaultDelay();
+                    System.out.printf("Your BMR is %.0f: \n", totalBmr - 500);
+                    defaultDelay();
+                    System.out.printf("You need %.0f grams of carbohydrates per day.\n", carb);
+                    defaultDelay();
+                    System.out.printf("You need %.0f grams of protein per day.\n", protein);
+                    defaultDelay();
+                    System.out.printf("You need %.0f grams of fat per day.\n", fat);
+                    defaultDelay();
+                } else if (userDecision == 2) {
+                    defaultDelay();
+                    System.out.printf("Your BMR is %.0f: \n", totalBmr);
+                    defaultDelay();
+                    System.out.printf("You need %.0f grams of carbohydrates per day.\n", carb);
+                    defaultDelay();
+                    System.out.printf("You need %.0f grams of protein per day.\n", protein);
+                    defaultDelay();
+                    System.out.printf("You need %.0f grams of fat per day.\n", fat);
+                    defaultDelay();
+                } else if (userDecision == 3) {
+                    defaultDelay();
+                    System.out.printf("Your BMR is %.0f: \n", totalBmr + 100);
+                    defaultDelay();
+                    System.out.printf("You need %.0f grams of carbohydrates per day.\n", carb);
+                    defaultDelay();
+                    System.out.printf("You need %.0f grams of protein per day.\n", protein + 75);
+                    defaultDelay();
+                    System.out.printf("You need %.0f grams of fat per day.\n", fat);
+                    defaultDelay();
+                }
+                System.out.println("Would you like to set a timer? (Yes/No)");
+                String timerChoice = scanner.next();
 
+                if (timerChoice.equalsIgnoreCase("Yes")) {
+                    System.out.println("Enter the duration of the timer in seconds:");
+                    int timerDuration = scanner.nextInt();
+                    delay(timerDuration*1000);
+                    System.out.println("Timer has been set for " + timerDuration + " seconds.");
+                }
+                System.exit(0);
             } catch (Exception e) {
                 System.out.println("Invalid input. Please enter numeric values for age and weight.");
             }
@@ -177,15 +183,15 @@ public class BMR {
                 category = "Obesity";
             }
         }
-        delay();
+        defaultDelay();
         System.out.printf("Your BMI will be %.1f and your category is: %s\n", bmindex, category);
     }
 
     public static void intro() {
         System.out.println("This app is builded by Seth and Huy ");
-        delay();
+        defaultDelay();
         System.out.println("The goal is to help people on their journey to meet their calories goals.");
-        delay();
+        defaultDelay();
         System.out.println();
     }
 
@@ -197,11 +203,25 @@ public class BMR {
         }
     }
 
-    public static void delay() {
+    public static void startTimer(int seconds) {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("Time's up!");
+            }
+        }, seconds * 1000);
+    }
+
+    public static void delay(int millis) {
         try {
-            Thread.sleep(200); // wait for 1 seconds
+            Thread.sleep(millis); 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void defaultDelay() {
+        delay(200);
     }
 }
