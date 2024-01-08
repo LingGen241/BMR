@@ -111,7 +111,7 @@ public class BMR {
                 }
                 if (userDecision == 1) {
                     defaultDelay();
-                    System.out.printf("Your BMR is %.0f: \n", totalBmr - 500);
+                    System.out.printf("Your BMR is %.0f: \n", totalBmr - 400);
                     defaultDelay();
                     System.out.printf("You need %.0f grams of carbohydrates per day.\n", carb);
                     defaultDelay();
@@ -131,11 +131,11 @@ public class BMR {
                     defaultDelay();
                 } else if (userDecision == 3) {
                     defaultDelay();
-                    System.out.printf("Your BMR is %.0f: \n", totalBmr + 100);
+                    System.out.printf("Your BMR is %.0f: \n", totalBmr - 350);
                     defaultDelay();
                     System.out.printf("You need %.0f grams of carbohydrates per day.\n", carb);
                     defaultDelay();
-                    System.out.printf("You need %.0f grams of protein per day.\n", protein + 75);
+                    System.out.printf("You need %.0f grams of protein per day.\n", protein + 25);
                     defaultDelay();
                     System.out.printf("You need %.0f grams of fat per day.\n", fat);
                     defaultDelay();
